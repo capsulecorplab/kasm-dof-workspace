@@ -195,6 +195,7 @@
         - pint
         - jinja2==3.1.2
         - linkml
+        - rdflib
 
 -
   # install Pandoc & TexLive
