@@ -279,6 +279,8 @@
       src: /home/kasm-default-profile/install_files/graphviz-2.50.0.tar.gz
       dest: /home/kasm-default-profile/install_files/
       remote_src: yes
+      extra_opts:
+      - '-z'
       creates: /home/kasm-default-profile/install_files/graphviz-2.50.0/README
   - name: Build graphviz
     shell: 
@@ -346,6 +348,8 @@
       src: /home/kasm-default-profile/install_files/pycharm-community-2022.2.2.tar.gz
       dest: /opt
       remote_src: yes
+      extra_opts:
+      - '-z'
   - name: add pycharm.sh to PATH
     lineinfile:
       path: "/etc/skel/.profile"
