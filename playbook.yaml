@@ -275,8 +275,10 @@
       name: build-essential, libcairo2-dev, libexpat-dev, libfreetype-dev, libgd-dev, fontconfig-config, libglib2.0-dev, libgtk2.0-dev, libpng-dev, zlib1g-dev, libsdl-pango-dev, libgts-bin, libgtk-3-dev, libgtkglext1-dev, glade, freeglut3-dev, autoconf, automake, bison, flex, ghostscript, libtool, pkg-config, swig 
       update_cache: yes  
   - name: Expand source files archive
-    shell: 
-      cmd: tar -xzf /home/kasm-default-profile/install_files/graphviz-2.50.0.tar.gz
+    unarchive:
+      src: /home/kasm-default-profile/install_files/graphviz-2.50.0.tar.gz
+      dest: /home/kasm-default-profile/install_files/
+      remote_src: yes
       creates: /home/kasm-default-profile/install_files/graphviz-2.50.0/README
   - name: Build graphviz
     shell: 
@@ -340,8 +342,10 @@
 
   tasks:
   - name: Unzip Pycharm
-    shell:
-      cmd: tar -xzf /home/kasm-default-profile/install_files/pycharm-community-2022.2.2.tar.gz -C /opt
+    unarchive:
+      src: /home/kasm-default-profile/install_files/pycharm-community-2022.2.2.tar.gz
+      dest: /opt
+      remote_src: yes
   - name: add pycharm.sh to PATH
     lineinfile:
       path: "/etc/skel/.profile"
