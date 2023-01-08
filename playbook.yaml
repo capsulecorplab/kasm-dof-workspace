@@ -51,6 +51,26 @@
 # Be sure to use the same hosts and connection entries above
 # addtional plays
 
+-
+  # Install zlib
+  hosts: localhost
+  connection: local
+  tags:
+  - install_generator_plantuml
+
+  tasks:
+  - name: Extract zlib v1.2.13 source from tarball
+    unarchive:
+      src: /home/kasm-default-profile/install_files/zlib-1.2.13.tar.gz
+      dest: /home/kasm-default-profile/install_files
+      remote_src: yes
+      creates: /home/kasm-default-profile/install_files/zlib-1.2.13/README
+  - name: Build zlib v1.2.13
+    shell:
+      cmd: ./configure && make > /tmp/zlib_build_output.txt 2>&1 && make install
+      chdir: /home/kasm-default-profile/install_files/zlib-1.2.13/
+      executable: /bin/bash
+
 - 
   # Install NodeJS Tools
   hosts: localhost
@@ -272,8 +292,8 @@
     register: installed_jdk_version
   - name: Install pre-reqs to build graphviz
     apt:
-      name: build-essential, libcairo2-dev, libexpat-dev, libfreetype-dev, libgd-dev, fontconfig-config, libglib2.0-dev, libgtk2.0-dev, libpng-dev, zlib1g-dev, libsdl-pango-dev, libgts-bin, libgtk-3-dev, libgtkglext1-dev, glade, freeglut3-dev, autoconf, automake, bison, flex, ghostscript, libtool, pkg-config, swig 
-      update_cache: yes  
+      name: build-essential, libcairo2-dev, libexpat-dev, libfreetype-dev, libgd-dev, fontconfig-config, libglib2.0-dev, libgtk2.0-dev, libpng-dev, libsdl-pango-dev, libgts-bin, libgtk-3-dev, libgtkglext1-dev, glade, freeglut3-dev, autoconf, automake, bison, flex, ghostscript, libtool, pkg-config, swig
+      update_cache: yes
   - name: Expand source files archive
     unarchive:
       src: /home/kasm-default-profile/install_files/graphviz-2.50.0.tar.gz
